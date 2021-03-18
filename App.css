@@ -1,0 +1,47 @@
+.App {
+  text-align: center;
+  background-color: #222;
+  height: 1000px;
+}
+
+.App-header {
+  background-color: #222;
+  padding: 20px;
+  color: #b30000;
+  font-family: 'Barrio', cursive;
+}
+
+p {
+  color: white;
+}
+
+.board {
+  /*width: 75%;*/
+}
+
+.cell {
+  height: 10px;
+  width: 10px;
+  border: 1px solid grey;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.alive {
+  background-color: #b3b300;
+}
+
+.dead {
+  background-color: black;
+}
+
+.skinnyRow {
+  margin: 0;
+  padding: 0;
+  height: 10px;
+}
+
+.play-button {
+  margin-top: 20px;
+  min-width: 500px;
+}
