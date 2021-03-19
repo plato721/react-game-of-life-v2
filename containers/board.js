@@ -86,7 +86,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ CreateBlankBoard, toggleCell, playPause, sendTick }, dispatch)
+  return bindActionCreators(
+    { CreateBlankBoard, toggleCell, playPause, sendTick },
+    dispatch
+  )
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board)
