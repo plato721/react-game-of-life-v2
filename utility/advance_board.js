@@ -2,8 +2,8 @@ import _ from "lodash"
 
 const advanceBoard = (oldBoard) => {
   const isAlive = (board, row, column) => {
-    var states = neighborStates(board, row, column)
-    var liveCount = _.countBy(states, (state) => {
+    const states = neighborStates(board, row, column)
+    let liveCount = _.countBy(states, (state) => {
       return state
     })
     liveCount = liveCount.true
@@ -31,7 +31,7 @@ const advanceBoard = (oldBoard) => {
   }
 
   const neighborCoordinates = (board, row, col) => {
-    var dumbCoords = [
+    const dumbCoords = [
       [row - 1, col - 1],
       [row - 1, col],
       [row - 1, col + 1],
@@ -52,9 +52,9 @@ const advanceBoard = (oldBoard) => {
     pair[0] < board.length &&
     pair[1] < board[1].length
 
-  var newBoard = _.cloneDeep(oldBoard)
-  var width = oldBoard.length
-  var height = oldBoard[0].length
+  const newBoard = _.cloneDeep(oldBoard)
+  const width = oldBoard.length
+  const height = oldBoard[0].length
 
   _.each(_.range(width), (column) => {
     _.each(_.range(height), (row) => {

@@ -56,7 +56,7 @@ class Board extends Component {
       clearInterval(this.props.game.intervalId)
       this.props.playPause()
     } else {
-      var intervalId = setInterval(
+      const intervalId = setInterval(
         this.props.sendTick,
         this.props.settings.interval
       )

@@ -1,5 +1,5 @@
 export default function (intervalId = null) {
-  var action = { type: "PLAY_PAUSE" }
+  const action = { type: "PLAY_PAUSE" }
   if (intervalId) {
     action["intervalId"] = intervalId
   }
