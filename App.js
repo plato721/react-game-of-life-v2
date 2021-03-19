@@ -1,15 +1,16 @@
-import React, { Component } from "react"
+import React from "react"
 import "./App.css"
-import Game from "./containers/game.js"
+import Board from "./containers/board"
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Game />
+const App = () => (
+  <div className="App">
+    <div>
+      <div className="App-header">
+        <h2>{"Conway's Game of Life"}</h2>
       </div>
-    )
-  }
-}
+      <Board />
+    </div>
+  </div>
+)
 
 export default App
