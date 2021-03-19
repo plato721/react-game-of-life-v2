@@ -1,15 +1,13 @@
 import React from "react"
 
 const Cell = ({ alive, row, column, handleClick }) => {
-  function cellClicked() {
-    handleClick(row, column)
-  }
+  const cellClicked = () => handleClick(row, column)
 
-  if (alive) {
-    return <div className="cell alive" onClick={cellClicked}></div>
-  } else {
-    return <div className="cell dead" onClick={cellClicked}></div>
-  }
+  return alive ? (
+    <div className="cell alive" onClick={cellClicked}></div>
+  ) : (
+    <div className="cell dead" onClick={cellClicked}></div>
+  )
 }
 
 export default Cell

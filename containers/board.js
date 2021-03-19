@@ -3,6 +3,9 @@ import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import CreateBlankBoard from "../actions/create_blank_board"
 import toggleCell from "../actions/toggle_cell.js"
+import playPause from "../actions/play_pause"
+import sendTick from "../actions/send_tick"
+import PlayButton from "../components/play_button"
 
 import Cell from "../components/cell.js"
 import _ from "lodash"
@@ -10,27 +13,15 @@ import _ from "lodash"
 class Board extends Component {
   constructor(props) {
     super(props)
-
-    this.width = this.width.bind(this)
-    this.height = this.height.bind(this)
-    this.aliveAt = this.aliveAt.bind(this)
-    this.handleCellClick = this.handleCellClick.bind(this)
   }
 
-  width() {
-    return this.props.settings.width
-  }
+  width = () => this.props.settings.width
+  height = () => this.props.settings.height
+  aliveAt = (row, column) => this.props.board[row][column]
+  handleCellClick = (row, column) => this.props.toggleCell(row, column)
 
-  height() {
-    return this.props.settings.height
-  }
-
-  componentWillMount() {
+  componentDidMount() {
     this.props.CreateBlankBoard({ width: this.width(), height: this.height() })
-  }
-
-  aliveAt(row, column) {
-    return this.props.board[row][column]
   }
 
   renderRow(row) {
@@ -60,24 +51,45 @@ class Board extends Component {
     })
   }
 
-  handleCellClick(row, column) {
-    this.props.toggleCell(row, column)
+  handlePlayButtonClick = () => {
+    if (this.props.game.playing) {
+      clearInterval(this.props.game.intervalId)
+      this.props.playPause()
+    } else {
+      const intervalId = setInterval(
+        this.props.sendTick,
+        this.props.settings.interval
+      )
+      this.props.playPause(intervalId)
+    }
   }
 
   render() {
-    return <div>{this.renderRows()}</div>
+    return (
+      <div className="board">
+        <div>{this.renderRows()}</div>
+        <PlayButton
+          clickHandler={this.handlePlayButtonClick}
+          playing={this.props.game.playing}
+        />
+      </div>
+    )
   }
 }
 
 function mapStateToProps(state) {
   return {
     board: state.board,
+    game: state.game,
     settings: state.settings,
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ CreateBlankBoard, toggleCell }, dispatch)
+  return bindActionCreators(
+    { CreateBlankBoard, toggleCell, playPause, sendTick },
+    dispatch
+  )
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board)
