@@ -13,27 +13,15 @@ import _ from "lodash"
 class Board extends Component {
   constructor(props) {
     super(props)
-
-    this.width = this.width.bind(this)
-    this.height = this.height.bind(this)
-    this.aliveAt = this.aliveAt.bind(this)
-    this.handleCellClick = this.handleCellClick.bind(this)
   }
 
-  width() {
-    return this.props.settings.width
-  }
-
-  height() {
-    return this.props.settings.height
-  }
+  width = () => this.props.settings.width
+  height = () => this.props.settings.height
+  aliveAt = (row, column) => this.props.board[row][column]
+  handleCellClick = (row, column) => this.props.toggleCell(row, column)
 
   componentDidMount() {
     this.props.CreateBlankBoard({ width: this.width(), height: this.height() })
-  }
-
-  aliveAt(row, column) {
-    return this.props.board[row][column]
   }
 
   renderRow(row) {
@@ -74,10 +62,6 @@ class Board extends Component {
       )
       this.props.playPause(intervalId)
     }
-  }
-
-  handleCellClick(row, column) {
-    this.props.toggleCell(row, column)
   }
 
   render() {
