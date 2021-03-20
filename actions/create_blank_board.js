@@ -5,8 +5,8 @@ const createBlankBoard = (dimensions) => {
   //   default to true.
   return {
     type: "NEW_BOARD",
-    payload: _.map(_.range(dimensions.width), () => {
-      return _.map(_.range(dimensions.height), () => {
+    payload: _.map(new Array(dimensions.width), () => {
+      return _.map(new Array(dimensions.height), () => {
         return Math.random(1) > 0.5 ? true : false
       })
     }),
