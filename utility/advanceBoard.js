@@ -1,67 +1,44 @@
-import _ from "lodash"
-
 const advanceBoard = (oldBoard) => {
-  const isAlive = (board, row, column) => {
-    const states = neighborStates(board, row, column)
-    let liveCount = _.countBy(states, (state) => {
-      return state
-    })
-    liveCount = liveCount.true
-    if (board[row][column]) {
-      // currently alive
-      if (liveCount === 2 || liveCount === 3) {
-        return true
-      } else {
-        return false
-      }
-    } else {
-      // currently dead
-      if (liveCount === 3) {
-        return true
-      } else {
-        return false
-      }
+  const aliveNeighborCount = (row, column) => {
+    const onBoard = (pair) =>
+      pair[0] >= 0 &&
+      pair[1] >= 0 &&
+      pair[0] < oldBoard.length &&
+      pair[1] < oldBoard[1].length
+
+    const neighborCoordinates = () => {
+      const dumbCoords = [
+        [row - 1, column - 1],
+        [row - 1, column],
+        [row - 1, column + 1],
+        [row, column - 1],
+        [row, column + 1],
+        [row + 1, column - 1],
+        [row + 1, column],
+        [row + 1, column + 1],
+      ]
+
+      return dumbCoords.filter((coords) => onBoard(coords))
     }
+
+    return neighborCoordinates(row, column).reduce((acc, [row, column]) => {
+      return acc + (oldBoard[row][column] ? 1 : 0)
+    }, 0)
   }
 
-  const neighborStates = (board, row, column) => {
-    return _.map(neighborCoordinates(board, row, column), (coords) => {
-      return board[coords[0]][coords[1]]
-    })
+  const cellAliveNextRound = (row, column) => {
+    const liveCount = aliveNeighborCount(row, column)
+    const cellCurrentlyAlive = oldBoard[row][column]
+    return cellCurrentlyAlive
+      ? liveCount === 2 || liveCount === 3
+      : liveCount === 3
   }
 
-  const neighborCoordinates = (board, row, col) => {
-    const dumbCoords = [
-      [row - 1, col - 1],
-      [row - 1, col],
-      [row - 1, col + 1],
-      [row, col - 1],
-      [row, col + 1],
-      [row + 1, col - 1],
-      [row + 1, col],
-      [row + 1, col + 1],
-    ]
-    return _.filter(dumbCoords, (pair) => {
-      return onBoard(board, pair)
-    })
-  }
-
-  const onBoard = (board, pair) =>
-    pair[0] >= 0 &&
-    pair[1] >= 0 &&
-    pair[0] < board.length &&
-    pair[1] < board[1].length
-
-  const newBoard = _.cloneDeep(oldBoard)
-  const width = oldBoard.length
-  const height = oldBoard[0].length
-
-  _.each(_.range(width), (column) => {
-    _.each(_.range(height), (row) => {
-      newBoard[row][column] = isAlive(oldBoard, row, column)
+  return oldBoard.map((row, rowNumber) => {
+    return row.map((currentlyAlive, colNumber) => {
+      return cellAliveNextRound(rowNumber, colNumber)
     })
   })
-  return newBoard
 }
 
 export default advanceBoard

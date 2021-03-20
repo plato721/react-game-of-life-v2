@@ -1,4 +1,3 @@
-import { TestScheduler } from "jest"
 import advanceBoard from "../../utility/advanceBoard"
 
 test("a blank board becomes a blank board", () => {
