@@ -1,14 +1,14 @@
-import _ from "lodash"
-
-export default function CreateBlankBoard(dimensions) {
+const createBlankBoard = (dimensions) => {
   // create a 2d array representing alive state of all cells.
-  //   default to true.
+  //   default to random
   return {
     type: "NEW_BOARD",
-    payload: _.map(_.range(dimensions.width), () => {
-      return _.map(_.range(dimensions.height), () => {
+    payload: new Array(dimensions.width).map(() => {
+      return new Array(dimensions.height).map(() => {
         return Math.random(1) > 0.5 ? true : false
       })
     }),
   }
 }
+
+export default createBlankBoard

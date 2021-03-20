@@ -1,3 +1,3 @@
-export default function () {
-  return { type: "TICK" }
-}
+const sendTick = () => ({ type: "TICK" })
+
+export default sendTick

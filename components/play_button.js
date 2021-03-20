@@ -1,23 +1,17 @@
-import React, { Component } from "react"
+import React from "react"
 
-class PlayButton extends Component {
-  buttonClasses = () =>
-    this.props.playing
-      ? "play-button btn btn-danger"
-      : "play-button btn btn-primary"
+const playButton = ({ playing, clickHandler }) => {
+  const buttonClasses = playing
+    ? "play-button btn btn-danger"
+    : "play-button btn btn-primary"
 
-  buttonText = () => (this.props.playing ? "Stop" : "Start")
+  const buttonText = playing ? "Stop" : "Start"
 
-  render() {
-    return (
-      <button
-        className={this.buttonClasses()}
-        onClick={this.props.clickHandler}
-      >
-        {this.buttonText()}
-      </button>
-    )
-  }
+  return (
+    <button className={buttonClasses} onClick={clickHandler}>
+      {buttonText}
+    </button>
+  )
 }
 
-export default PlayButton
+export default playButton

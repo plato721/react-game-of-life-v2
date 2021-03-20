@@ -1,4 +1,4 @@
-export default function toggleCell(row, column) {
+const toggleCell = (row, column) => {
   return {
     type: "TOGGLE_CELL",
     payload: {
@@ -7,3 +7,5 @@ export default function toggleCell(row, column) {
     },
   }
 }
+
+export default toggleCell

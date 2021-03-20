@@ -27,15 +27,15 @@ const advanceBoard = (oldBoard) => {
   }
 
   const cellAliveNextRound = (row, column) => {
-    const liveCount = aliveNeighborCount(row, column)
+    const numAliveNeighbors = aliveNeighborCount(row, column)
     const cellCurrentlyAlive = oldBoard[row][column]
     return cellCurrentlyAlive
-      ? liveCount === 2 || liveCount === 3
-      : liveCount === 3
+      ? numAliveNeighbors === 2 || numAliveNeighbors === 3
+      : numAliveNeighbors === 3
   }
 
   return oldBoard.map((row, rowNumber) => {
-    return row.map((currentlyAlive, colNumber) => {
+    return row.map((_, colNumber) => {
       return cellAliveNextRound(rowNumber, colNumber)
     })
   })
