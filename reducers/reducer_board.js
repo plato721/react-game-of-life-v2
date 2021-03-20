@@ -1,5 +1,5 @@
 import _ from "lodash"
-import advanceBoard from "../utility/advance_board"
+import advanceBoard from "../utility/advanceBoard"
 
 function toggleCell(board, row, column) {
   board[row][column] = !board[row][column]

@@ -7,9 +7,7 @@ export default function CreateBlankBoard(dimensions) {
     type: "NEW_BOARD",
     payload: _.map(_.range(dimensions.width), () => {
       return _.map(_.range(dimensions.height), () => {
-        return Math.random(1) > 0.5
-        ? true
-        : false
+        return Math.random(1) > 0.5 ? true : false
       })
     }),
   }
