@@ -1,6 +1,6 @@
 import _ from "lodash"
 
-export default function CreateBlankBoard(dimensions) {
+const createBlankBoard = (dimensions) => {
   // create a 2d array representing alive state of all cells.
   //   default to true.
   return {
@@ -12,3 +12,5 @@ export default function CreateBlankBoard(dimensions) {
     }),
   }
 }
+
+export default createBlankBoard
