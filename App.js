@@ -2,12 +2,10 @@ import React from "react"
 import "./App.css"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
-
 import PlayButton from "./components/PlayButton"
 import Board from "./containers/Board"
-
-import playPause from "./actions/play_pause"
-import sendTick from "./actions/send_tick"
+import playPause from "./actions/playPause"
+import sendTick from "./actions/sendTick"
 
 class App extends React.Component {
   constructor(props) {
@@ -33,7 +31,10 @@ class App extends React.Component {
         <div className="App-header">
           <h2>{"Conway's Game of Life"}</h2>
         </div>
-        <Board />
+        <Board 
+          width={this.props.settings.width}
+          height={this.props.settings.height}
+        />
         <PlayButton
           clickHandler={this.handlePlayButtonClick}
           playing={this.props.game.playing}

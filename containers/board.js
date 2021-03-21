@@ -1,9 +1,8 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
-import CreateBlankBoard from "../actions/create_blank_board"
-import toggleCell from "../actions/toggle_cell.js"
-
+import createBlankBoard from "../actions/createBlankBoard"
+import toggleCell from "../actions/toggleCell.js"
 import Cell from "../components/cell.js"
 
 class Board extends Component {
@@ -11,13 +10,13 @@ class Board extends Component {
     super(props)
   }
 
-  width = () => this.props.settings.width
-  height = () => this.props.settings.height
-  aliveAt = (row, column) => this.props.board[row][column]
   handleCellClick = (row, column) => this.props.toggleCell(row, column)
 
   componentDidMount() {
-    this.props.CreateBlankBoard({ width: this.width(), height: this.height() })
+    this.props.createBlankBoard({
+      width: this.props.width,
+      height: this.props.height,
+    })
   }
 
   renderRow(row, rowNumber) {
@@ -55,12 +54,11 @@ class Board extends Component {
 const mapStateToProps = (state) => {
   return {
     board: state.board,
-    settings: state.settings,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ CreateBlankBoard, toggleCell }, dispatch)
+  return bindActionCreators({ createBlankBoard, toggleCell }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board)
