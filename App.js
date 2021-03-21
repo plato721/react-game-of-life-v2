@@ -31,7 +31,10 @@ class App extends React.Component {
         <div className="App-header">
           <h2>{"Conway's Game of Life"}</h2>
         </div>
-        <Board />
+        <Board 
+          width={this.props.settings.width}
+          height={this.props.settings.height}
+        />
         <PlayButton
           clickHandler={this.handlePlayButtonClick}
           playing={this.props.game.playing}

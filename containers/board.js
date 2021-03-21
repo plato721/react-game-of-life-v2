@@ -10,13 +10,14 @@ class Board extends Component {
     super(props)
   }
 
-  width = () => this.props.settings.width
-  height = () => this.props.settings.height
   aliveAt = (row, column) => this.props.board[row][column]
   handleCellClick = (row, column) => this.props.toggleCell(row, column)
 
   componentDidMount() {
-    this.props.createBlankBoard({ width: this.width(), height: this.height() })
+    this.props.createBlankBoard({
+      width: this.props.width,
+      height: this.props.height,
+    })
   }
 
   renderRow(row, rowNumber) {
@@ -54,7 +55,6 @@ class Board extends Component {
 const mapStateToProps = (state) => {
   return {
     board: state.board,
-    settings: state.settings,
   }
 }
 
