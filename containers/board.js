@@ -52,14 +52,14 @@ class Board extends Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     board: state.board,
     settings: state.settings,
   }
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ CreateBlankBoard, toggleCell }, dispatch)
 }
 
