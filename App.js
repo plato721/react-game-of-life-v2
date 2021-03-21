@@ -41,14 +41,14 @@ class App extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     game: state.game,
     settings: state.settings
   }
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     { playPause, sendTick }, dispatch
   )
