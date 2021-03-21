@@ -5,7 +5,6 @@ import CreateBlankBoard from "../actions/create_blank_board"
 import toggleCell from "../actions/toggle_cell.js"
 
 import Cell from "../components/cell.js"
-import _ from "lodash"
 
 class Board extends Component {
   constructor(props) {
@@ -21,15 +20,15 @@ class Board extends Component {
     this.props.CreateBlankBoard({ width: this.width(), height: this.height() })
   }
 
-  renderRow(row) {
-    return _.map(_.range(this.width()), (column) => {
+  renderRow(row, rowNumber) {
+    return row.map((isAlive, colNumber) => {
       return (
         <Cell
-          alive={this.aliveAt(row, column)}
-          row={row}
-          column={column}
+          alive={isAlive}
+          row={rowNumber}
+          column={colNumber}
           handleClick={this.handleCellClick}
-          key={`${row},${column}`}
+          key={`${rowNumber},${colNumber}`}
         />
       )
     })
@@ -39,10 +38,10 @@ class Board extends Component {
     if (this.props.board === null) {
       return <div>Loading...</div>
     }
-    return _.map(_.range(this.height()), (row) => {
+    return this.props.board.map((row, rowNumber) => {
       return (
-        <div className="skinnyRow" key={`row_${row}`}>
-          {this.renderRow(row)}
+        <div className="skinnyRow" key={`row_${rowNumber}`}>
+          {this.renderRow(row, rowNumber)}
         </div>
       )
     })
