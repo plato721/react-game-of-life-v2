@@ -8,15 +8,11 @@
   background-color: #222;
   padding: 20px;
   color: #b30000;
-  font-family: 'Barrio', cursive;
+  font-family: "Barrio", cursive;
 }
 
 p {
   color: white;
-}
-
-.board {
-  /*width: 75%;*/
 }
 
 .cell {
