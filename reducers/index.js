@@ -1,7 +1,7 @@
 import { combineReducers } from "redux"
-import Settings from "./reducer_settings"
-import Board from "./reducer_board"
-import Game from "./reducer_game"
+import Settings from "./reducerSettings"
+import Board from "./reducerBoard"
+import Game from "./reducerGame"
 
 const rootReducer = combineReducers({
   settings: Settings,
