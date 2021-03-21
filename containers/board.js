@@ -10,7 +10,6 @@ class Board extends Component {
     super(props)
   }
 
-  aliveAt = (row, column) => this.props.board[row][column]
   handleCellClick = (row, column) => this.props.toggleCell(row, column)
 
   componentDidMount() {
