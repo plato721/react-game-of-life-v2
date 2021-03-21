@@ -1,28 +1,28 @@
-import _ from "lodash"
 import advanceBoard from "../utility/advanceBoard"
 
-function toggleCell(board, row, column) {
-  board[row][column] = !board[row][column]
-  return board
-}
-
-export default function Board(state = null, action) {
+const board = (state = null, action) => {
+  const toggleCell = (board, row, column) => {
+    board[row][column] = !board[row][column]
+    return board
+  }
   switch (action.type) {
     case "NEW_BOARD": {
       return action.payload
     }
     case "TOGGLE_CELL": {
       return toggleCell(
-        _.cloneDeep(state),
+        JSON.parse(JSON.stringify(state)),
         action.payload.row,
         action.payload.column
       )
     }
     case "TICK": {
-      return advanceBoard(_.cloneDeep(state))
+      return advanceBoard(JSON.parse(JSON.stringify(state)))
     }
     default: {
       return state
     }
   }
 }
+
+export default board
