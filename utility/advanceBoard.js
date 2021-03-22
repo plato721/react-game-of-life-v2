@@ -18,7 +18,7 @@ const advanceBoard = (oldBoard) => {
         [row + 1, column + 1],
       ]
 
-      return dumbCoords.filter((coords) => onBoard(coords))
+      return dumbCoords.filter(onBoard)
     }
 
     return neighborCoordinates(row, column).reduce((acc, [row, column]) => {
@@ -26,6 +26,8 @@ const advanceBoard = (oldBoard) => {
     }, 0)
   }
 
+  // 2 or 3 live neighbors keeps a cell alive, 3 live neighbors brings
+  // back a dead one.
   const cellAliveNextRound = (row, column) => {
     const numAliveNeighbors = aliveNeighborCount(row, column)
     const cellCurrentlyAlive = oldBoard[row][column]
@@ -34,11 +36,9 @@ const advanceBoard = (oldBoard) => {
       : numAliveNeighbors === 3
   }
 
-  return oldBoard.map((row, rowNumber) => {
-    return row.map((_, colNumber) => {
-      return cellAliveNextRound(rowNumber, colNumber)
-    })
-  })
+  return oldBoard.map((row, rowNumber) =>
+    row.map((_, colNumber) => cellAliveNextRound(rowNumber, colNumber))
+  )
 }
 
 export default advanceBoard
