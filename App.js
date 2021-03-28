@@ -1,59 +1,34 @@
-import React from "react"
+import React, { useState } from "react"
 import "./App.css"
-import { connect } from "react-redux"
-import { bindActionCreators } from "redux"
 import PlayButton from "./components/PlayButton"
-import Board from "./containers/Board"
-import playPause from "./actions/playPause"
-import sendTick from "./actions/sendTick"
+import Board from "./components/Board"
 
-class App extends React.Component {
-  constructor(props) {
-    super(props)
+const App = () => {
+  const defaults = {
+    width: 50,
+    height: 50,
+    delay: 500,
   }
 
-  handlePlayButtonClick = () => {
-    if (this.props.game.playing) {
-      clearInterval(this.props.game.intervalId)
-      this.props.playPause()
-    } else {
-      const intervalId = setInterval(
-        this.props.sendTick,
-        this.props.settings.interval
-      )
-      this.props.playPause(intervalId)
-    }
+  const [playing, setPlaying] = useState(false)
+
+  const handlePlayButtonClick = () => {
+    setPlaying((playing) => !playing)
   }
 
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <h2>{"Conway's Game of Life"}</h2>
-        </div>
-        <Board 
-          width={this.props.settings.width}
-          height={this.props.settings.height}
-        />
-        <PlayButton
-          clickHandler={this.handlePlayButtonClick}
-          playing={this.props.game.playing}
-        />
+  return (
+    <div className="App">
+      <div className="App-header">
+        <h2>{"Conway's Game of Life"}</h2>
       </div>
-    )
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    game: state.game,
-    settings: state.settings
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    { playPause, sendTick }, dispatch
+      <Board
+        width={defaults.width}
+        height={defaults.height}
+        playing={playing}
+        tickDuration={defaults.delay}
+      />
+      <PlayButton clickHandler={handlePlayButtonClick} playing={playing} />
+    </div>
   )
 }
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App
