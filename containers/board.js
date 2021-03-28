@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import createBlankBoard from "../actions/createBlankBoard"
 import toggleCell from "../actions/toggleCell.js"
-import Cell from "../components/cell.js"
+import DisplayBoard from "../components/DisplayBoard"
 
 class Board extends Component {
   constructor(props) {
@@ -19,35 +19,13 @@ class Board extends Component {
     })
   }
 
-  renderRow(row, rowNumber) {
-    return row.map((isAlive, colNumber) => {
-      return (
-        <Cell
-          alive={isAlive}
-          row={rowNumber}
-          column={colNumber}
-          handleClick={this.handleCellClick}
-          key={`${rowNumber},${colNumber}`}
-        />
-      )
-    })
-  }
-
-  renderRows() {
-    if (this.props.board === null) {
-      return <div>Loading...</div>
-    }
-    return this.props.board.map((row, rowNumber) => {
-      return (
-        <div className="skinnyRow" key={`row_${rowNumber}`}>
-          {this.renderRow(row, rowNumber)}
-        </div>
-      )
-    })
-  }
-
   render() {
-    return <div>{this.renderRows()}</div>
+    return (
+      <DisplayBoard
+        board={this.props.board}
+        handleCellClick={this.handleCellClick}
+      />
+    )
   }
 }
 
