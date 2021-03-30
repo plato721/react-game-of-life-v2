@@ -30,6 +30,13 @@ const Board = ({ playing, tickDuration, width, height }) => {
   }
 
   useEffect(() => {
+    if (playing) {
+      clearInterval(tickInterval.current)
+      updateGameRunning(playing)
+    }
+  }, [tickDuration])
+
+  useEffect(() => {
     return updateGameRunning(playing)
   }, [playing])
 

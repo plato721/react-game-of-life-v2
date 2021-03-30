@@ -1,16 +1,20 @@
 import React from "react"
+import Button from "@material-ui/core/Button"
 
 const playButton = ({ playing, clickHandler }) => {
-  const buttonClasses = playing
-    ? "play-button btn btn-danger"
-    : "play-button btn btn-primary"
-
+  const buttonColor = playing ? "secondary" : "primary"
   const buttonText = playing ? "Stop" : "Start"
 
   return (
-    <button className={buttonClasses} onClick={clickHandler}>
+    <Button
+      className="play-button"
+      variant="contained"
+      color={buttonColor}
+      backgroundColor="primary"
+      onClick={clickHandler}
+    >
       {buttonText}
-    </button>
+    </Button>
   )
 }
 
