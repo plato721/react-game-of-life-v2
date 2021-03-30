@@ -1,19 +1,18 @@
 import React from "react"
 import Button from "@material-ui/core/Button"
+import PlayIcon from "@material-ui/icons/PlayCircleOutline"
+import PauseIcon from "@material-ui/icons/PauseCircleOutline"
 
 const playButton = ({ playing, clickHandler }) => {
-  const buttonColor = playing ? "secondary" : "primary"
-  const buttonText = playing ? "Stop" : "Start"
-
   return (
     <Button
-      className="play-button"
-      variant="contained"
-      color={buttonColor}
-      backgroundColor="primary"
       onClick={clickHandler}
+      color={playing ? "secondary" : "primary"}
+      startIcon={playing ? <PauseIcon /> : <PlayIcon />}
+      variant="outlined"
+      size="large"
     >
-      {buttonText}
+      {playing ? "Pause" : "Play"}
     </Button>
   )
 }
