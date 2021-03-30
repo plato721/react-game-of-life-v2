@@ -1,18 +1,20 @@
-.App {
-  text-align: center;
+html {
   background-color: #222;
-  height: 1000px;
+}
+
+#root {
+  background-color: #222;
+}
+
+.App {
+  background-color: #222;
+  padding-top: 20px;
 }
 
 .App-header {
   background-color: #222;
-  padding: 20px;
   color: #b30000;
   font-family: "Barrio", cursive;
-}
-
-p {
-  color: white;
 }
 
 .cell {
@@ -21,23 +23,22 @@ p {
   border: 1px solid grey;
   display: inline-block;
   cursor: pointer;
+  margin: 0;
+  padding: 0;
 }
 
-.alive {
+.cell.alive {
   background-color: #b3b300;
 }
 
-.dead {
+.cell.dead {
   background-color: black;
 }
 
-.skinnyRow {
-  margin: 0;
-  padding: 0;
-  height: 10px;
+.board-row {
+  height: 12px;
 }
 
 .play-button {
-  margin-top: 20px;
-  min-width: 500px;
+  width: 600px;
 }

@@ -1,5 +1,6 @@
 import React from "react"
 import Cell from "./Cell"
+import Grid from "@material-ui/core/Grid"
 
 const DisplayBoard = ({ board, handleCellClick }) => {
   const renderRow = (row, rowNumber) => {
@@ -22,14 +23,18 @@ const DisplayBoard = ({ board, handleCellClick }) => {
     }
     return board.map((row, rowNumber) => {
       return (
-        <div className="skinnyRow" key={`row_${rowNumber}`}>
+        <Grid item className="board-row" key={`row_${rowNumber}`}>
           {renderRow(row, rowNumber)}
-        </div>
+        </Grid>
       )
     })
   }
 
-  return <div>{renderRows()}</div>
+  return (
+    <Grid container spacing={0} direction="column">
+      {renderRows()}
+    </Grid>
+  )
 }
 
 export default DisplayBoard
