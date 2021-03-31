@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from "react"
 import DisplayBoard from "../components/DisplayBoard"
-import randomBoard from "../utility/randomBoard"
 import advanceBoard from "../utility/advanceBoard"
 
-const Board = ({ playing, tickDuration, width, height }) => {
-  const [board, setBoard] = useState(randomBoard({ height, width }))
+const Board = ({ playing, tickDuration, initialBoard }) => {
+  const [board, setBoard] = useState(initialBoard)
   const tickInterval = useRef(null)
 
   const handleCellClick = (row, column) => {
@@ -39,6 +38,10 @@ const Board = ({ playing, tickDuration, width, height }) => {
   useEffect(() => {
     return updateGameRunning(playing)
   }, [playing])
+
+  useEffect(() => {
+    setBoard(initialBoard)
+  }, [initialBoard])
 
   return <DisplayBoard board={board} handleCellClick={handleCellClick} />
 }
