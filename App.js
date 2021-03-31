@@ -1,18 +1,20 @@
 import React, { useState } from "react"
 import "./App.css"
 import PlayButton from "./components/PlayButton"
+import RefreshButton from "./components/RefreshButton"
 import Board from "./components/Board"
 import GameSpeed from "./components/GameSpeed"
 import Grid from "@material-ui/core/grid"
 import Container from "@material-ui/core/container"
+import randomBoard from "./utility/randomBoard"
 
 const App = () => {
   const MINSPEED = 1 // these refer to material-ui continuous slider min/max
   const MAXSPEED = 100
 
   const defaults = {
-    width: 50,
-    height: 50,
+    numColumns: 50,
+    numRows: 50,
     maxDelay: 1000,
     minDelay: 10,
     delay: 500,
@@ -20,6 +22,10 @@ const App = () => {
 
   const [playing, setPlaying] = useState(false)
   const [tickDelay, setTickDelay] = useState(defaults.delay)
+
+  const { numRows, numColumns } = defaults
+  const defaultBoard = randomBoard({ numRows, numColumns })
+  const [newBoard, setNewBoard] = useState(defaultBoard)
 
   // take speed 1 to 100 and map to tick delay
   const tickDelayFromSpeed = (speed) => {
@@ -40,7 +46,10 @@ const App = () => {
   const handlePlayButtonClick = () => setPlaying((playing) => !playing)
   const handleGameSpeedSelect = (e, value) =>
     setTickDelay(tickDelayFromSpeed(value))
+  const handleRefreshButtonClick = () =>
+    setNewBoard(randomBoard({ numRows, numColumns }))
 
+  console.log("board", newBoard)
   return (
     <Container className="App" fixed>
       <Grid container direction="column" alignItems="center" spacing={2}>
@@ -49,13 +58,13 @@ const App = () => {
         </Grid>
         <Grid item>
           <Board
-            width={defaults.width}
-            height={defaults.height}
             playing={playing}
             tickDuration={tickDelay}
+            initialBoard={newBoard}
           />
         </Grid>
-        <Grid item>
+        <Grid item container direction="row" justify="space-around">
+          <RefreshButton clickHandler={handleRefreshButtonClick} />
           <PlayButton clickHandler={handlePlayButtonClick} playing={playing} />
         </Grid>
         <Grid item>
