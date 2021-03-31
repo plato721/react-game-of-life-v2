@@ -49,7 +49,6 @@ const App = () => {
   const handleRefreshButtonClick = () =>
     setNewBoard(randomBoard({ numRows, numColumns }))
 
-  console.log("board", newBoard)
   return (
     <Container className="App" fixed>
       <Grid container direction="column" alignItems="center" spacing={2}>
